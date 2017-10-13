@@ -68,10 +68,7 @@ Bullet.prototype.render = function (ctx) {
     // a value between 0 (totally transparent) and 1 (totally opaque).
 
     var fadeThresh = this.lifeSpan / 30;
-    if(fadeThresh<= 0){
-      fadeThresh = 0;
-    }
-    console.log(fadeThresh);
+
     ctx.save();
     ctx.globalAlpha = fadeThresh;
 

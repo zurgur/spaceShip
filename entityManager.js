@@ -45,15 +45,25 @@ _generateRocks : function() {
 },
 
 _findNearestShip : function(posX, posY) {
-
-    // TODO: Implement this
+    var theShip = 0;
+    var theIndex = 0;
+    var short = Infinity;
+    for (var i = 0 ; i < this._ships.length; i++){
+      var p = this._ships[i].getPos();
+      var d = util.wrappedDistSq(posX,posY,p.posX,p.posY,g_canvas.width,g_canvas.height);
+      if(short > d){
+        theShip = this._ships[i];
+        theIndex = i;
+        short = d
+      }
+    }
 
     // NB: Use this technique to let you return "multiple values"
     //     from a function. It's pretty useful!
     //
     return {
-	theShip : closestShip,   // the object itself
-	theIndex: closestIndex   // the array index where it lives
+	theShip : theShip,   // the object itself
+	theIndex: theIndex   // the array index where it lives
     };
 },
 
@@ -101,15 +111,13 @@ generateShip : function(descr) {
 },
 
 killNearestShip : function(xPos, yPos) {
-    // TODO: Implement this
-
-    // NB: Don't forget the "edge cases"
+    var near = this._findNearestShip(xPos, yPos);
+    this._ships.splice(near.theIndex,1);
 },
 
 yoinkNearestShip : function(xPos, yPos) {
-    // TODO: Implement this
-
-    // NB: Don't forget the "edge cases"
+  var near = this._findNearestShip(xPos, yPos);
+  this._ships[near.theIndex].setPos(xPos,yPos);
 },
 
 resetShips: function() {
