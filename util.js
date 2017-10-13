@@ -44,7 +44,9 @@ isBetween: function(value, lowBound, highBound) {
 randRange: function(min, max) {
     return (min + Math.random() * (max - min));
 },
-
+randDerection: function() {
+  return Math.floor(Math.random()*2) === 1 ? 1 :-1;
+},
 
 // MISC
 // ====

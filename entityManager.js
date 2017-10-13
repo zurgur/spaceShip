@@ -17,7 +17,7 @@ with suitable 'data' and 'methods'.
 
 
 // Tell jslint not to complain about my use of underscore prefixes (nomen),
-// my flattening of some indentation (white), or my use of incr/decr ops 
+// my flattening of some indentation (white), or my use of incr/decr ops
 // (plusplus).
 //
 /*jslint nomen: true, white: true, plusplus: true*/
@@ -37,9 +37,11 @@ _bShowRocks : false,
 
 _generateRocks : function() {
     var i,
-	NUM_ROCKS = 4;
+	   NUM_ROCKS = 4;
 
-    // TODO: Make `NUM_ROCKS` Rocks!
+    for(var i = 0; i<4;i++){
+      this._rocks.push(new Rock());
+    }
 },
 
 _findNearestShip : function(posX, posY) {
@@ -83,13 +85,18 @@ init: function() {
 },
 
 fireBullet: function(cx, cy, velX, velY, rotation) {
+  /*this._Bullets.push(
+    var bullit = function Bullet() {
+      this.cx = cx;
+      this.cy = cy;
+    }
+  );*/
 
-    // TODO: Implement this
 
 },
 
 generateShip : function(descr) {
-    // TODO: Implement this
+    this._ships.push(new Ship(descr));
 },
 
 killNearestShip : function(xPos, yPos) {
@@ -110,7 +117,7 @@ resetShips: function() {
 
 haltShips: function() {
     this._forEachOf(this._ships, Ship.prototype.halt);
-},	
+},
 
 toggleRocks: function() {
     this._bShowRocks = !this._bShowRocks;
@@ -122,6 +129,13 @@ update: function(du) {
 
     // NB: Remember to handle the "KILL_ME_NOW" return value!
     //     and to properly update the array in that case.
+    for (var i = 0; i < this._rocks.length; ++i) {
+        this._rocks[i].update(du);
+    }
+    for (var i = 0; i < this._ships.length; ++i) {
+        this._ships[i].update(du);
+    }
+
 },
 
 render: function(ctx) {
@@ -130,7 +144,12 @@ render: function(ctx) {
 
     // NB: Remember to implement the ._bShowRocks toggle!
     // (Either here, or if you prefer, in the Rock objects)
-
+    for (var i = 0; i < this._rocks.length; ++i) {
+        this._rocks[i].render(ctx);
+    }
+    for (var i = 0; i < this._ships.length; ++i) {
+      this._ships[i].render(ctx);
+    }
 }
 
 }
