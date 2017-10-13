@@ -134,10 +134,7 @@ toggleRocks: function() {
 
 update: function(du) {
 
-    // TODO: Implement this
 
-    // NB: Remember to handle the "KILL_ME_NOW" return value!
-    //     and to properly update the array in that case.
     for (var i = 0; i < this._rocks.length; ++i) {
         this._rocks[i].update(du);
     }
@@ -159,9 +156,12 @@ render: function(ctx) {
 
     // NB: Remember to implement the ._bShowRocks toggle!
     // (Either here, or if you prefer, in the Rock objects)
-    for (var i = 0; i < this._rocks.length; ++i) {
-        this._rocks[i].render(ctx);
+    if(this._bShowRocks){
+      for (var i = 0; i < this._rocks.length; ++i) {
+          this._rocks[i].render(ctx);
+      }
     }
+
     for (var i = 0; i < this._ships.length; ++i) {
       this._ships[i].render(ctx);
     }
