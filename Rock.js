@@ -13,11 +13,6 @@
 
 function Rock() {
 
-    // TODO: Implement this
-
-    // NB: Set our `cx` and `cy` values to random positions on the canvas
-    //     `g_canvas`, and its properties, are available to you here.
-
     // Rock randomisation
     this.cx = Math.random()*g_canvas.width;
     this.cy = Math.random()*g_canvas.height;

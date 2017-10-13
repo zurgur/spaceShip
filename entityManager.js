@@ -85,12 +85,13 @@ init: function() {
 },
 
 fireBullet: function(cx, cy, velX, velY, rotation) {
-  /*this._Bullets.push(
-    var bullit = function Bullet() {
-      this.cx = cx;
-      this.cy = cy;
-    }
-  );*/
+    this._bullets.push(new Bullet({
+      cy : cy,
+      cx : cx,
+      velX : velX,
+      velY : velY,
+      rotation : rotation
+    }));
 
 
 },
@@ -135,6 +136,12 @@ update: function(du) {
     for (var i = 0; i < this._ships.length; ++i) {
         this._ships[i].update(du);
     }
+    for (var i = 0; i < this._bullets.length; i++) {
+      this._bullets[i].update(du);
+      if(this._bullets[i].lifeSpan <= 0){
+        this._bullets.splice(i,1);
+      }
+    }
 
 },
 
@@ -149,6 +156,9 @@ render: function(ctx) {
     }
     for (var i = 0; i < this._ships.length; ++i) {
       this._ships[i].render(ctx);
+    }
+    for (var i = 0; i < this._bullets.length; i++) {
+      this._bullets[i].render(ctx);
     }
 }
 
